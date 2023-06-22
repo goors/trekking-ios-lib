@@ -398,7 +398,7 @@ open class AdventuresAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func adventuresGetCategories(apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [AdventureCategory]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func adventuresGetCategories(apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [AdventurCategoryLightModel]?, _ error: Error?) -> Void)) -> RequestTask {
         return adventuresGetCategoriesWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -416,7 +416,7 @@ open class AdventuresAPI {
        - name: JWT
      - returns: RequestBuilder<[AdventureCategory]> 
      */
-    open class func adventuresGetCategoriesWithRequestBuilder() -> RequestBuilder<[AdventureCategory]> {
+    open class func adventuresGetCategoriesWithRequestBuilder() -> RequestBuilder<[AdventurCategoryLightModel]> {
         let localVariablePath = "/api/v2.0/Adventures/Options/Categories"
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -429,7 +429,7 @@ open class AdventuresAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[AdventureCategory]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[AdventurCategoryLightModel]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
