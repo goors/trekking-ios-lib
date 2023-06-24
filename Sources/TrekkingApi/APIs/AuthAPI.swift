@@ -309,7 +309,14 @@ open class AuthAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func register(role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String? = nil, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil, syncStatus: Bool? = nil, id: String? = nil, internalDbId: Int64? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: String?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func register(role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String? = nil, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil, syncStatus: Bool? = nil, id: String? = nil, internalDbId: Int64? = nil, createdAt: Date? = nil,
+                             updatedAt: Date? = nil,
+                             country: String? = nil,
+                             city: String? = nil,
+                             zip: String? = nil,
+                             locality: String? = nil,
+                             osmId: Int? = nil,
+                             apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: String?, _ error: Error?) -> Void)) -> RequestTask {
         return registerWithRequestBuilder(role: role, password: password, photo: photo, email: email, firstName: firstName, lastname: lastname, news: news, title: title, deviceId: deviceId, deviceType: deviceType, photoId: photoId, shareProfile: shareProfile, shareActivities: shareActivities, syncStatus: syncStatus, id: id, internalDbId: internalDbId, createdAt: createdAt, updatedAt: updatedAt).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -345,7 +352,14 @@ open class AuthAPI {
      - parameter updatedAt: (form)  (optional)
      - returns: RequestBuilder<String> 
      */
-    open class func registerWithRequestBuilder(role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String? = nil, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil, syncStatus: Bool? = nil, id: String? = nil, internalDbId: Int64? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) -> RequestBuilder<String> {
+    open class func registerWithRequestBuilder(role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String? = nil, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil, syncStatus: Bool? = nil, id: String? = nil, internalDbId: Int64? = nil, createdAt: Date? = nil, updatedAt: Date? = nil,
+                                               country: String? = nil,
+                                               city: String? = nil,
+                                               zip: String? = nil,
+                                               locality: String? = nil,
+                                               osmId: Int? = nil
+    
+    ) -> RequestBuilder<String> {
         let localVariablePath = "/api/v2.0/Auth/Registration"
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
         let localVariableFormParams: [String: Any?] = [
@@ -367,6 +381,11 @@ open class AuthAPI {
             "InternalDbId": internalDbId?.encodeToJSON(),
             "CreatedAt": createdAt?.encodeToJSON(),
             "UpdatedAt": updatedAt?.encodeToJSON(),
+            "Country": country?.encodeToJSON(),
+            "City": city?.encodeToJSON(),
+            "Zip": zip?.encodeToJSON(),
+            "Locality": locality?.encodeToJSON(),
+            "OsmId": osmId?.encodeToJSON(),
         ]
 
         let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
