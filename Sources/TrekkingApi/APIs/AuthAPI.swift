@@ -317,7 +317,14 @@ open class AuthAPI {
                              locality: String? = nil,
                              osmId: Int? = nil,
                              apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: String?, _ error: Error?) -> Void)) -> RequestTask {
-        return registerWithRequestBuilder(role: role, password: password, photo: photo, email: email, firstName: firstName, lastname: lastname, news: news, title: title, deviceId: deviceId, deviceType: deviceType, photoId: photoId, shareProfile: shareProfile, shareActivities: shareActivities, syncStatus: syncStatus, id: id, internalDbId: internalDbId, createdAt: createdAt, updatedAt: updatedAt).execute(apiResponseQueue) { result in
+        return registerWithRequestBuilder(role: role, password: password, photo: photo, email: email, firstName: firstName, lastname: lastname, news: news, title: title, deviceId: deviceId, deviceType: deviceType, photoId: photoId, shareProfile: shareProfile, shareActivities: shareActivities, syncStatus: syncStatus, id: id, internalDbId: internalDbId, createdAt: createdAt, updatedAt: updatedAt,
+                                          country: country,
+                                          city: city,
+                                          zip: zip,
+                                          locality: locality,
+                                          osmId: osmId
+        
+        ).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
