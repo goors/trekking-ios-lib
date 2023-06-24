@@ -32,8 +32,20 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
     public var shareProfile: Bool?
     public var shareActivities: Bool?
     public var syncStatus: Bool?
+    public var country: String?
+    public var city: String?
+    public var zip: String?
+    public var locality: String?
+    public var osmId: Int?
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil, syncStatus: Bool? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, role: UserRole? = nil, password: String? = nil, photo: URL? = nil, email: String, firstName: String? = nil, lastname: String? = nil, news: Bool? = nil, title: String? = nil, deviceId: String? = nil, deviceType: UserDeviceType? = nil, photoId: String? = nil, shareProfile: Bool? = nil, shareActivities: Bool? = nil,
+                syncStatus: Bool? = nil,
+                country: String? = nil,
+                city: String? = nil,
+                zip: String? = nil,
+                locality: String? = nil,
+                osmId: Int? = nil
+    ) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -51,6 +63,11 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
         self.shareProfile = shareProfile
         self.shareActivities = shareActivities
         self.syncStatus = syncStatus
+        self.country = country
+        self.city = city
+        self.zip = zip
+        self.locality = locality
+        self.osmId = osmId
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -71,6 +88,11 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
         case shareProfile
         case shareActivities
         case syncStatus
+        case country
+        case city
+        case zip
+        case locality
+        case osmId
     }
 
     // Encodable protocol methods
@@ -94,6 +116,11 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(shareProfile, forKey: .shareProfile)
         try container.encodeIfPresent(shareActivities, forKey: .shareActivities)
         try container.encodeIfPresent(syncStatus, forKey: .syncStatus)
+        try container.encodeIfPresent(country, forKey: .country)
+        try container.encodeIfPresent(city, forKey: .city)
+        try container.encodeIfPresent(zip, forKey: .zip)
+        try container.encodeIfPresent(locality, forKey: .locality)
+        try container.encodeIfPresent(osmId, forKey: .osmId)
     }
 
     public static func == (lhs: UserModel, rhs: UserModel) -> Bool {
@@ -113,7 +140,12 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
         lhs.photoId == rhs.photoId &&
         lhs.shareProfile == rhs.shareProfile &&
         lhs.shareActivities == rhs.shareActivities &&
-        lhs.syncStatus == rhs.syncStatus
+        lhs.syncStatus == rhs.syncStatus &&
+        lhs.country == rhs.country &&
+        lhs.city == rhs.city &&
+        lhs.zip == rhs.zip &&
+        lhs.locality == rhs.locality &&
+        lhs.osmId == rhs.osmId
         
     }
 
@@ -135,6 +167,11 @@ public final class UserModel: Codable, JSONEncodable, Hashable {
         hasher.combine(shareProfile?.hashValue)
         hasher.combine(shareActivities?.hashValue)
         hasher.combine(syncStatus?.hashValue)
+        hasher.combine(country?.hashValue)
+        hasher.combine(city?.hashValue)
+        hasher.combine(zip?.hashValue)
+        hasher.combine(locality?.hashValue)
+        hasher.combine(osmId?.hashValue)
         
     }
 }
