@@ -19,8 +19,49 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
     public var commentsAllowed: Bool?
     public var isPublished: Bool?
     public var isRecommended: Bool?
+    
+    public var startDate: Date
+    public var endDate: Date
+    public var totalDistance: Double
+    public var totalDuration: Double
+    public var minAltitude: Double
+    public var maxAltitude: Double
+    public var totalUpLength: Double
+    public var totalDownLength: Double
+    public var idleTime: Double
+    public var totalUpTime: Double
+    public var totalDownTime: Double
+    public var minSpeed: Double
+    public var maxSpeed: Double
+    public var avgSpeed: Double
+    public var caloriesBurned: Double
+    public var snickersBurned: Double
 
-    public init(title: String? = nil, subTitle: String? = nil, level: AdventureLightModelBaseInfoLevel? = nil, coverPhoto: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, isRecommended: Bool? = nil) {
+    public init(
+        title: String? = nil,
+        subTitle: String? = nil,
+        level: AdventureLightModelBaseInfoLevel? = nil,
+        coverPhoto: String? = nil,
+        commentsAllowed: Bool? = nil,
+        isPublished: Bool? = nil,
+        isRecommended: Bool? = nil,
+        startDate: Date,
+        endDate: Date,
+        totalDistance: Double,
+        totalDuration: Double,
+        minAltitude: Double,
+        maxAltitude: Double,
+        totalUpLength: Double,
+        totalDownLength: Double,
+        idleTime: Double,
+        totalUpTime: Double,
+        totalDownTime: Double,
+        minSpeed: Double,
+        maxSpeed: Double,
+        avgSpeed: Double,
+        caloriesBurned: Double,
+        snickersBurned: Double
+    ) {
         self.title = title
         self.subTitle = subTitle
         self.level = level
@@ -28,6 +69,23 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         self.commentsAllowed = commentsAllowed
         self.isPublished = isPublished
         self.isRecommended = isRecommended
+        
+        self.startDate = startDate
+        self.endDate = endDate
+        self.totalDistance = totalDistance
+        self.totalDuration = totalDuration
+        self.minAltitude = minAltitude
+        self.maxAltitude = maxAltitude
+        self.totalUpLength = totalUpLength
+        self.totalDownLength = totalDownLength
+        self.idleTime = idleTime
+        self.totalUpTime = totalUpTime
+        self.totalDownTime = totalDownTime
+        self.minSpeed = minSpeed
+        self.maxSpeed = maxSpeed
+        self.avgSpeed = avgSpeed
+        self.caloriesBurned = caloriesBurned
+        self.snickersBurned = snickersBurned
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -38,6 +96,23 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         case commentsAllowed
         case isPublished
         case isRecommended
+        
+        case startDate
+        case endDate
+        case totalDistance
+        case totalDuration
+        case minAltitude
+        case maxAltitude
+        case totalUpLength
+        case totalDownLength
+        case idleTime
+        case totalUpTime
+        case totalDownTime
+        case minSpeed
+        case maxSpeed
+        case avgSpeed
+        case caloriesBurned
+        case snickersBurned
     }
 
     // Encodable protocol methods
@@ -51,6 +126,22 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         try container.encodeIfPresent(commentsAllowed, forKey: .commentsAllowed)
         try container.encodeIfPresent(isPublished, forKey: .isPublished)
         try container.encodeIfPresent(isRecommended, forKey: .isRecommended)
+        try container.encodeIfPresent(startDate, forKey: .startDate)
+        try container.encodeIfPresent(endDate, forKey: .endDate)
+        try container.encodeIfPresent(totalDistance, forKey: .totalDistance)
+        try container.encodeIfPresent(totalDuration, forKey: .totalDuration)
+        try container.encodeIfPresent(minAltitude, forKey: .minAltitude)
+        try container.encodeIfPresent(maxAltitude, forKey: .maxAltitude)
+        try container.encodeIfPresent(totalUpLength, forKey: .totalUpLength)
+        try container.encodeIfPresent(totalDownLength, forKey: .totalDownLength)
+        try container.encodeIfPresent(idleTime, forKey: .idleTime)
+        try container.encodeIfPresent(totalUpTime, forKey: .totalUpTime)
+        try container.encodeIfPresent(totalDownTime, forKey: .totalDownTime)
+        try container.encodeIfPresent(minSpeed, forKey: .minSpeed)
+        try container.encodeIfPresent(maxSpeed, forKey: .maxSpeed)
+        try container.encodeIfPresent(avgSpeed, forKey: .avgSpeed)
+        try container.encodeIfPresent(caloriesBurned, forKey: .caloriesBurned)
+        try container.encodeIfPresent(snickersBurned, forKey: .snickersBurned)
     }
 
     public static func == (lhs: AdventureLightModelBaseInfo, rhs: AdventureLightModelBaseInfo) -> Bool {
@@ -60,7 +151,23 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         lhs.coverPhoto == rhs.coverPhoto &&
         lhs.commentsAllowed == rhs.commentsAllowed &&
         lhs.isPublished == rhs.isPublished &&
-        lhs.isRecommended == rhs.isRecommended
+        lhs.isRecommended == rhs.isRecommended &&
+        lhs.startDate == rhs.startDate &&
+        lhs.endDate == rhs.endDate &&
+        lhs.totalDistance == rhs.totalDistance &&
+        lhs.totalDuration == rhs.totalDuration &&
+        lhs.minAltitude == rhs.minAltitude &&
+        lhs.maxAltitude == rhs.maxAltitude &&
+        lhs.totalUpLength == rhs.totalUpLength &&
+        lhs.totalDownLength == rhs.totalDownLength &&
+        lhs.idleTime == rhs.idleTime &&
+        lhs.totalUpTime == rhs.totalUpTime &&
+        lhs.totalDownTime == rhs.totalDownTime &&
+        lhs.minSpeed == rhs.minSpeed &&
+        lhs.maxSpeed == rhs.maxSpeed &&
+        lhs.avgSpeed == rhs.avgSpeed &&
+        lhs.caloriesBurned == rhs.caloriesBurned &&
+        lhs.snickersBurned == rhs.snickersBurned
         
     }
 
@@ -72,6 +179,22 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         hasher.combine(commentsAllowed?.hashValue)
         hasher.combine(isPublished?.hashValue)
         hasher.combine(isRecommended?.hashValue)
+        hasher.combine(startDate.hashValue)
+        hasher.combine(endDate.hashValue)
+        hasher.combine(totalDistance.hashValue)
+        hasher.combine(totalDuration.hashValue)
+        hasher.combine(minAltitude.hashValue)
+        hasher.combine(maxAltitude.hashValue)
+        hasher.combine(totalUpLength.hashValue)
+        hasher.combine(totalDownLength.hashValue)
+        hasher.combine(idleTime.hashValue)
+        hasher.combine(totalUpTime.hashValue)
+        hasher.combine(totalDownTime.hashValue)
+        hasher.combine(minSpeed.hashValue)
+        hasher.combine(maxSpeed.hashValue)
+        hasher.combine(avgSpeed.hashValue)
+        hasher.combine(caloriesBurned.hashValue)
+        hasher.combine(snickersBurned.hashValue)
         
     }
 }
