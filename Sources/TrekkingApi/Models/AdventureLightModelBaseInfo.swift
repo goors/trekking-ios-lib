@@ -36,6 +36,8 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
     public var avgSpeed: Double
     public var caloriesBurned: Double
     public var snickersBurned: Double
+    public var maxSlope: Double
+    public var minSlope: Double
 
     public init(
         title: String? = nil,
@@ -60,7 +62,9 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         maxSpeed: Double,
         avgSpeed: Double,
         caloriesBurned: Double,
-        snickersBurned: Double
+        snickersBurned: Double,
+        maxSlope: Double,
+        minSlope: Double
     ) {
         self.title = title
         self.subTitle = subTitle
@@ -86,6 +90,8 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         self.avgSpeed = avgSpeed
         self.caloriesBurned = caloriesBurned
         self.snickersBurned = snickersBurned
+        self.maxSlope = maxSlope
+        self.minSlope = minSlope
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -113,6 +119,8 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         case avgSpeed
         case caloriesBurned
         case snickersBurned
+        case maxSlope
+        case minSlope
     }
 
     // Encodable protocol methods
@@ -142,6 +150,8 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         try container.encodeIfPresent(avgSpeed, forKey: .avgSpeed)
         try container.encodeIfPresent(caloriesBurned, forKey: .caloriesBurned)
         try container.encodeIfPresent(snickersBurned, forKey: .snickersBurned)
+        try container.encodeIfPresent(maxSlope, forKey: .maxSlope)
+        try container.encodeIfPresent(minSlope, forKey: .minSlope)
     }
 
     public static func == (lhs: AdventureLightModelBaseInfo, rhs: AdventureLightModelBaseInfo) -> Bool {
@@ -167,7 +177,9 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         lhs.maxSpeed == rhs.maxSpeed &&
         lhs.avgSpeed == rhs.avgSpeed &&
         lhs.caloriesBurned == rhs.caloriesBurned &&
-        lhs.snickersBurned == rhs.snickersBurned
+        lhs.snickersBurned == rhs.snickersBurned &&
+        lhs.maxSlope == rhs.maxSlope &&
+        lhs.minSlope == rhs.minSlope
         
     }
 
@@ -195,6 +207,8 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         hasher.combine(avgSpeed.hashValue)
         hasher.combine(caloriesBurned.hashValue)
         hasher.combine(snickersBurned.hashValue)
+        hasher.combine(maxSlope.hashValue)
+        hasher.combine(minSlope.hashValue)
         
     }
 }
