@@ -17,13 +17,15 @@ public struct CountryModel: Codable, JSONEncodable, Hashable {
     public var updatedAt: Date?
     public var name: String?
     public var geom: AnyCodable?
+    public var polygons: AnyCodable?
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, name: String? = nil, geom: AnyCodable? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, name: String? = nil, geom: AnyCodable? = nil, polygons: AnyCodable? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.name = name
         self.geom = geom
+        self.polygons = polygons
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +34,7 @@ public struct CountryModel: Codable, JSONEncodable, Hashable {
         case updatedAt
         case name
         case geom
+        case polygons
     }
 
     // Encodable protocol methods
@@ -43,6 +46,7 @@ public struct CountryModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(geom, forKey: .geom)
+        try container.encodeIfPresent(polygons, forKey: .polygons)
     }
 }
 
