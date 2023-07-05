@@ -17,13 +17,16 @@ public final class AdventureLightModelGeoInfo: Codable, JSONEncodable, Hashable 
     public var start: AnyCodable?
     public var end: AnyCodable?
     public var bearing: Double?
+    
+    public var envelope: AnyCodable?
 
-    public init(altitudes: [Double]? = nil, activityRecords: [ActivityRecord]? = nil, start: AnyCodable? = nil, end: AnyCodable? = nil, bearing: Double? = nil) {
+    public init(altitudes: [Double]? = nil, activityRecords: [ActivityRecord]? = nil, start: AnyCodable? = nil, end: AnyCodable? = nil, bearing: Double? = nil, envelope: AnyCodable? = nil) {
         self.altitudes = altitudes
         self.activityRecords = activityRecords
         self.start = start
         self.end = end
         self.bearing = bearing
+        self.envelope = envelope
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +35,7 @@ public final class AdventureLightModelGeoInfo: Codable, JSONEncodable, Hashable 
         case start
         case end
         case bearing
+        case envelope
     }
 
     // Encodable protocol methods
@@ -43,6 +47,7 @@ public final class AdventureLightModelGeoInfo: Codable, JSONEncodable, Hashable 
         try container.encodeIfPresent(start, forKey: .start)
         try container.encodeIfPresent(end, forKey: .end)
         try container.encodeIfPresent(bearing, forKey: .bearing)
+        try container.encodeIfPresent(envelope, forKey: .envelope)
     }
 
     public static func == (lhs: AdventureLightModelGeoInfo, rhs: AdventureLightModelGeoInfo) -> Bool {
@@ -50,7 +55,8 @@ public final class AdventureLightModelGeoInfo: Codable, JSONEncodable, Hashable 
         lhs.activityRecords == rhs.activityRecords &&
         lhs.start == rhs.start &&
         lhs.end == rhs.end &&
-        lhs.bearing == rhs.bearing
+        lhs.bearing == rhs.bearing &&
+        lhs.envelope == rhs.envelope
         
     }
 
@@ -60,6 +66,7 @@ public final class AdventureLightModelGeoInfo: Codable, JSONEncodable, Hashable 
         hasher.combine(start?.hashValue)
         hasher.combine(end?.hashValue)
         hasher.combine(bearing?.hashValue)
+        hasher.combine(envelope?.hashValue)
         
     }
 }
