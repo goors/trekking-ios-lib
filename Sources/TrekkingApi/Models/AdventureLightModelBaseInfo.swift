@@ -19,6 +19,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
     public var commentsAllowed: Bool?
     public var isPublished: Bool?
     public var isRecommended: Bool?
+    public var freeDownload: Bool
     
     public var startDate: Date
     public var endDate: Date
@@ -47,6 +48,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         commentsAllowed: Bool? = nil,
         isPublished: Bool? = nil,
         isRecommended: Bool? = nil,
+        freeDownload: Bool,
         startDate: Date,
         endDate: Date,
         totalDistance: Double,
@@ -73,6 +75,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         self.commentsAllowed = commentsAllowed
         self.isPublished = isPublished
         self.isRecommended = isRecommended
+        self.freeDownload = freeDownload
         
         self.startDate = startDate
         self.endDate = endDate
@@ -102,6 +105,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         case commentsAllowed
         case isPublished
         case isRecommended
+        case freeDownload
         
         case startDate
         case endDate
@@ -134,6 +138,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         try container.encodeIfPresent(commentsAllowed, forKey: .commentsAllowed)
         try container.encodeIfPresent(isPublished, forKey: .isPublished)
         try container.encodeIfPresent(isRecommended, forKey: .isRecommended)
+        try container.encodeIfPresent(freeDownload, forKey: .freeDownload)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
         try container.encodeIfPresent(totalDistance, forKey: .totalDistance)
@@ -162,6 +167,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         lhs.commentsAllowed == rhs.commentsAllowed &&
         lhs.isPublished == rhs.isPublished &&
         lhs.isRecommended == rhs.isRecommended &&
+        lhs.freeDownload == rhs.freeDownload &&
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate &&
         lhs.totalDistance == rhs.totalDistance &&
@@ -191,6 +197,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         hasher.combine(commentsAllowed?.hashValue)
         hasher.combine(isPublished?.hashValue)
         hasher.combine(isRecommended?.hashValue)
+        hasher.combine(freeDownload.hashValue)
         hasher.combine(startDate.hashValue)
         hasher.combine(endDate.hashValue)
         hasher.combine(totalDistance.hashValue)
