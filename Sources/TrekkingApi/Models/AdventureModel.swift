@@ -25,10 +25,11 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
     public var slug: String?
     public var commentsAllowed: Bool?
     public var isPublished: Bool?
+    public var freeDownload: Bool?
     public var photos: [AdventurePhoto]?
     public var videos: [String]?
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil, freeDownload: Bool? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -41,6 +42,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         self.isPublished = isPublished
         self.photos = photos
         self.videos = videos
+        self.freeDownload = freeDownload
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -56,6 +58,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         case isPublished
         case photos
         case videos
+        case freeDownload
     }
 
     // Encodable protocol methods
@@ -74,6 +77,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(isPublished, forKey: .isPublished)
         try container.encodeIfPresent(photos, forKey: .photos)
         try container.encodeIfPresent(videos, forKey: .videos)
+        try container.encodeIfPresent(freeDownload, forKey: .freeDownload)
     }
 
     public static func == (lhs: AdventureModel, rhs: AdventureModel) -> Bool {
@@ -87,6 +91,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         lhs.slug == rhs.slug &&
         lhs.commentsAllowed == rhs.commentsAllowed &&
         lhs.isPublished == rhs.isPublished &&
+        lhs.freeDownload == rhs.freeDownload &&
         lhs.photos == rhs.photos &&
         lhs.videos == rhs.videos
         
@@ -103,6 +108,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         hasher.combine(slug?.hashValue)
         hasher.combine(commentsAllowed?.hashValue)
         hasher.combine(isPublished?.hashValue)
+        hasher.combine(freeDownload?.hashValue)
         hasher.combine(photos?.hashValue)
         hasher.combine(videos?.hashValue)
         
