@@ -20,6 +20,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
     public var isPublished: Bool?
     public var isRecommended: Bool?
     public var freeDownload: Bool
+    public var price: Double?
     
     public var startDate: Date
     public var endDate: Date
@@ -49,6 +50,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         isPublished: Bool? = nil,
         isRecommended: Bool? = nil,
         freeDownload: Bool,
+        price: Double?,
         startDate: Date,
         endDate: Date,
         totalDistance: Double,
@@ -76,6 +78,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         self.isPublished = isPublished
         self.isRecommended = isRecommended
         self.freeDownload = freeDownload
+        self.price = price
         
         self.startDate = startDate
         self.endDate = endDate
@@ -106,6 +109,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         case isPublished
         case isRecommended
         case freeDownload
+        case price
         
         case startDate
         case endDate
@@ -139,6 +143,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         try container.encodeIfPresent(isPublished, forKey: .isPublished)
         try container.encodeIfPresent(isRecommended, forKey: .isRecommended)
         try container.encodeIfPresent(freeDownload, forKey: .freeDownload)
+        try container.encodeIfPresent(price, forKey: .price)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
         try container.encodeIfPresent(totalDistance, forKey: .totalDistance)
@@ -168,6 +173,7 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         lhs.isPublished == rhs.isPublished &&
         lhs.isRecommended == rhs.isRecommended &&
         lhs.freeDownload == rhs.freeDownload &&
+        lhs.price == rhs.price &&
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate &&
         lhs.totalDistance == rhs.totalDistance &&
