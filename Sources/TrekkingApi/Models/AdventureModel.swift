@@ -31,8 +31,20 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
     public var price: Double?
     public var level: UserAdventureLevel
     public var categoryId: String
+    public var distance: Double
+    public var duration: Double
+    public var startDate: Date
+    public var endDate: Date
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil, freeDownload: Bool? = nil, price: Double? = nil, level: UserAdventureLevel, categoryId: String) {
+    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil, freeDownload: Bool? = nil, price: Double? = nil, level: UserAdventureLevel,
+                
+                categoryId: String,
+                distance: Double,
+                duration: Double,
+                startDate: Date,
+                endDate: Date
+    
+    ) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -49,6 +61,10 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         self.price = price
         self.level = level
         self.categoryId = categoryId
+        self.distance = distance
+        self.duration = duration
+        self.startDate = startDate
+        self.endDate = endDate
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -68,6 +84,10 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         case price
         case level
         case categoryId
+        case distance
+        case duration
+        case startDate
+        case endDate
     }
 
     // Encodable protocol methods
@@ -90,6 +110,10 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(price, forKey: .price)
         try container.encodeIfPresent(level, forKey: .level)
         try container.encodeIfPresent(categoryId, forKey: .categoryId)
+        try container.encodeIfPresent(distance, forKey: .distance)
+        try container.encodeIfPresent(duration, forKey: .duration)
+        try container.encodeIfPresent(startDate, forKey: .startDate)
+        try container.encodeIfPresent(endDate, forKey: .endDate)
     }
 
     public static func == (lhs: AdventureModel, rhs: AdventureModel) -> Bool {
@@ -108,6 +132,10 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         lhs.price == rhs.price &&
         lhs.level == rhs.level &&
         lhs.categoryId == rhs.categoryId &&
+        lhs.distance == rhs.distance &&
+        lhs.duration == rhs.duration &&
+        lhs.startDate == rhs.startDate &&
+        lhs.endDate == rhs.endDate &&
         lhs.videos == rhs.videos
         
     }
@@ -129,6 +157,10 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         hasher.combine(price?.hashValue)
         hasher.combine(level.hashValue)
         hasher.combine(categoryId.hashValue)
+        hasher.combine(distance.hashValue)
+        hasher.combine(duration.hashValue)
+        hasher.combine(startDate.hashValue)
+        hasher.combine(endDate.hashValue)
         
     }
 }
