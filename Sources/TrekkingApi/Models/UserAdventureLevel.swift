@@ -12,7 +12,7 @@ import AnyCodable
 
 /**  */
 public enum UserAdventureLevel: Int, Codable, CaseIterable {
-    case _0 = 0
-    case _1 = 1
-    case _2 = 2
+    case Easy = 0
+    case Moderate = 1
+    case Hard = 2
 }
