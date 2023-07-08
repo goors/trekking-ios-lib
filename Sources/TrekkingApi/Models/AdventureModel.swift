@@ -35,6 +35,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
     public var duration: Double
     public var startDate: Date
     public var endDate: Date
+    public var activityRecords: [ActivityRecord]
 
     public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil, freeDownload: Bool? = nil, price: Double? = nil, level: UserAdventureLevel,
                 
@@ -42,7 +43,8 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
                 distance: Double,
                 duration: Double,
                 startDate: Date,
-                endDate: Date
+                endDate: Date,
+                activityRecords: [ActivityRecord]
     
     ) {
         self.id = id
@@ -65,6 +67,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         self.duration = duration
         self.startDate = startDate
         self.endDate = endDate
+        self.activityRecords = activityRecords
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -88,6 +91,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         case duration
         case startDate
         case endDate
+        case activityRecords
     }
 
     // Encodable protocol methods
@@ -114,6 +118,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(duration, forKey: .duration)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
+        try container.encodeIfPresent(activityRecords, forKey: .activityRecords)
     }
 
     public static func == (lhs: AdventureModel, rhs: AdventureModel) -> Bool {
@@ -136,6 +141,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         lhs.duration == rhs.duration &&
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate &&
+        lhs.activityRecords == rhs.activityRecords &&
         lhs.videos == rhs.videos
         
     }
@@ -161,6 +167,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         hasher.combine(duration.hashValue)
         hasher.combine(startDate.hashValue)
         hasher.combine(endDate.hashValue)
+        hasher.combine(activityRecords.hashValue)
         
     }
 }
