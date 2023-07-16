@@ -110,8 +110,8 @@ open class AdventuresAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func adventuresFind(adventuresQuery: AdventuresQuery, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: EntitySearchResultOfAdventuresLightModel?, _ error: Error?) -> Void)) -> RequestTask {
-        return adventuresFindWithRequestBuilder(adventuresQuery: adventuresQuery).execute(apiResponseQueue) { result in
+    open class func adventuresFind(adventuresQuery: AdventuresQuery, lang: AdventureLanguageEnum, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: EntitySearchResultOfAdventuresLightModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return adventuresFindWithRequestBuilder(adventuresQuery: adventuresQuery, lang: lang).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -129,13 +129,16 @@ open class AdventuresAPI {
      - parameter adventuresQuery: (body)  
      - returns: RequestBuilder<EntitySearchResultOfAdventuresLightModel> 
      */
-    open class func adventuresFindWithRequestBuilder(adventuresQuery: AdventuresQuery) -> RequestBuilder<EntitySearchResultOfAdventuresLightModel> {
+    open class func adventuresFindWithRequestBuilder(adventuresQuery: AdventuresQuery, lang: AdventureLanguageEnum) -> RequestBuilder<EntitySearchResultOfAdventuresLightModel> {
         let localVariablePath = "/api/v2.0/Adventures/Query"
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: adventuresQuery)
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "lang": (wrappedValue: lang.encodeToJSON(), isExplode: true),
+        ])
         let localVariableNillableHeaders: [String: Any?] = [
             :
         ]
