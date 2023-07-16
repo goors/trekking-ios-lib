@@ -15,9 +15,9 @@ final class TrekkingIosLibTests: XCTestCase {
         AdventuresAPI.adventuresFind(
             adventuresQuery: AdventuresQuery(
                 maxItemCount: 1,
-                fields: Int(AdventuresQueryFieldsBitwise.BaseInfo.bitmask() | AdventuresQueryFieldsBitwise.UserInfo.bitmask())
+                fields: Int(AdventuresQueryFieldsBitwise.BaseInfo.bitmask() | AdventuresQueryFieldsBitwise.UserInfo.bitmask() | AdventuresQueryFieldsBitwise.CategoryInfo.bitmask() | AdventuresQueryFieldsBitwise.GeoInfo.bitmask())
                 
-            )) { data, error in
+            ), lang: AdventureLanguageEnum.German) { data, error in
                 
                 guard error == nil else {
                     

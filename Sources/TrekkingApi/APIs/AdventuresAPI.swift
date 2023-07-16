@@ -201,8 +201,8 @@ open class AdventuresAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func adventuresGet(id: String, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: AdventuresLightModel?, _ error: Error?) -> Void)) -> RequestTask {
-        return adventuresGetWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
+    open class func adventuresGet(id: String, lang: AdventureLanguageEnum, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: AdventuresLightModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return adventuresGetWithRequestBuilder(id: id, lang: lang).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -220,7 +220,7 @@ open class AdventuresAPI {
      - parameter id: (path)  
      - returns: RequestBuilder<AdventuresLightModel> 
      */
-    open class func adventuresGetWithRequestBuilder(id: String) -> RequestBuilder<AdventuresLightModel> {
+    open class func adventuresGetWithRequestBuilder(id: String, lang: AdventureLanguageEnum) -> RequestBuilder<AdventuresLightModel> {
         var localVariablePath = "/api/v2.0/Adventures/{id}"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -228,7 +228,11 @@ open class AdventuresAPI {
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "lang": (wrappedValue: lang.encodeToJSON(), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
