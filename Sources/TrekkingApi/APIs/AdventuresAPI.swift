@@ -405,8 +405,8 @@ open class AdventuresAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func adventuresGetCategories(apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [AdventurCategoryLightModel]?, _ error: Error?) -> Void)) -> RequestTask {
-        return adventuresGetCategoriesWithRequestBuilder().execute(apiResponseQueue) { result in
+    open class func adventuresGetCategories(lang: AdventureLanguageEnum, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [AdventurCategoryLightModel]?, _ error: Error?) -> Void)) -> RequestTask {
+        return adventuresGetCategoriesWithRequestBuilder(lang: lang).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -423,16 +423,22 @@ open class AdventuresAPI {
        - name: JWT
      - returns: RequestBuilder<[AdventureCategory]> 
      */
-    open class func adventuresGetCategoriesWithRequestBuilder() -> RequestBuilder<[AdventurCategoryLightModel]> {
+    open class func adventuresGetCategoriesWithRequestBuilder(lang: AdventureLanguageEnum) -> RequestBuilder<[AdventurCategoryLightModel]> {
         let localVariablePath = "/api/v2.0/Adventures/Options/Categories"
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        
+
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
         ]
+        
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "lang": (wrappedValue: lang.encodeToJSON(), isExplode: true),
+        ])
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
