@@ -17,13 +17,17 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
     public var updatedAt: Date?
     public var title: String?
     public var icon: String?
+    public var lang: AdventureLanguageEnum
+    public var translations: [String:String]
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil) {
+    public init(lang: AdventureLanguageEnum, translations: [String:String], id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.title = title
         self.icon = icon
+        self.lang = lang
+        self.translations = translations
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +36,8 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         case updatedAt
         case title
         case icon
+        case lang
+        case translations
     }
 
     // Encodable protocol methods
@@ -43,6 +49,8 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(icon, forKey: .icon)
+        try container.encodeIfPresent(lang, forKey: .lang)
+        try container.encodeIfPresent(translations, forKey: .translations)
     }
 
     public static func == (lhs: AdventurCategoryLightModel, rhs: AdventurCategoryLightModel) -> Bool {
@@ -50,6 +58,8 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         lhs.createdAt == rhs.createdAt &&
         lhs.updatedAt == rhs.updatedAt &&
         lhs.title == rhs.title &&
+        lhs.lang == rhs.lang &&
+        lhs.translations == rhs.translations &&
         lhs.icon == rhs.icon
         
     }
@@ -60,6 +70,8 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         hasher.combine(updatedAt?.hashValue)
         hasher.combine(title?.hashValue)
         hasher.combine(icon?.hashValue)
+        hasher.combine(translations.hashValue)
+        hasher.combine(lang.hashValue)
         
     }
 }
