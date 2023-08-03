@@ -36,7 +36,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
     public var startDate: Date
     public var endDate: Date
     public var activityRecords: [ActivityRecord]
-    public var lang: AdventureLanguageEnum
+    public var language: AdventureLanguageEnum
 
     public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String, subTitle: String, text: String, coverPhoto: String? = nil, slug: String? = nil, commentsAllowed: Bool? = nil, isPublished: Bool? = nil, photos: [AdventurePhoto]? = nil, videos: [String]? = nil, freeDownload: Bool? = nil, price: Double? = nil, level: UserAdventureLevel,
                 
@@ -46,7 +46,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
                 startDate: Date,
                 endDate: Date,
                 activityRecords: [ActivityRecord],
-                lang: AdventureLanguageEnum
+                language: AdventureLanguageEnum
     
     ) {
         self.id = id
@@ -70,7 +70,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         self.startDate = startDate
         self.endDate = endDate
         self.activityRecords = activityRecords
-        self.lang = lang
+        self.language = language
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -95,7 +95,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         case startDate
         case endDate
         case activityRecords
-        case lang
+        case language
     }
 
     // Encodable protocol methods
@@ -123,7 +123,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
         try container.encodeIfPresent(activityRecords, forKey: .activityRecords)
-        try container.encodeIfPresent(lang, forKey: .lang)
+        try container.encodeIfPresent(language, forKey: .language)
     }
 
     public static func == (lhs: AdventureModel, rhs: AdventureModel) -> Bool {
@@ -147,7 +147,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate &&
         lhs.activityRecords == rhs.activityRecords &&
-        lhs.lang == rhs.lang &&
+        lhs.language == rhs.language &&
         lhs.videos == rhs.videos
         
     }
@@ -174,7 +174,7 @@ public final class AdventureModel: Codable, JSONEncodable, Hashable {
         hasher.combine(startDate.hashValue)
         hasher.combine(endDate.hashValue)
         hasher.combine(activityRecords.hashValue)
-        hasher.combine(lang.hashValue)
+        hasher.combine(language.hashValue)
         
     }
 }
