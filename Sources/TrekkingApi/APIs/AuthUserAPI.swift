@@ -404,4 +404,54 @@ open class AuthUserAPI {
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
+    
+    
+    /**
+
+     - parameter id: (path)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func authUserAdventuresGet(lang: AdventureLanguageEnum, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [AdventuresLightModel]?, _ error: Error?) -> Void)) -> RequestTask {
+        return authUserAdventuresGet(lang: lang).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - GET /api/v2.0/Adventures/{id}
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter id: (path)
+     - returns: RequestBuilder<AdventuresLightModel>
+     */
+    open class func authUserAdventuresGet(lang: AdventureLanguageEnum) -> RequestBuilder<[AdventuresLightModel]> {
+        var localVariablePath = "/api/v2.0/AuthUser/Adventures"
+        
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "lang": (wrappedValue: lang.encodeToJSON(), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[AdventuresLightModel]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
 }
