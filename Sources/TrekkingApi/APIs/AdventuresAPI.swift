@@ -848,4 +848,111 @@ open class AdventuresAPI {
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
+    
+    
+    
+    /**
+
+     - parameter id: (path)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func adventuresGetUserFollowers(userId: String, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [UserProfileActivity]?, _ error: Error?) -> Void)) -> RequestTask {
+        return adventuresGetUserFollowersBuilder(userId: userId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - GET /api/v2.0/Adventures/{id}
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter id: (path)
+     - returns: RequestBuilder<AdventuresLightModel>
+     */
+    open class func adventuresGetUserFollowersBuilder(userId: String) -> RequestBuilder<[UserProfileActivity]> {
+        var localVariablePath = "/api/v2.0/Adventures/Query/Users/Followers/{userId}"
+        
+        
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(userId))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{userId}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[UserProfileActivity]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+    
+    
+    /**
+
+     - parameter id: (path)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func adventuresGetUserFollowing(userId: String, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [UserProfileActivity]?, _ error: Error?) -> Void)) -> RequestTask {
+        return adventuresGetUserFollowingBuilder(userId: userId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - GET /api/v2.0/Adventures/{id}
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter id: (path)
+     - returns: RequestBuilder<AdventuresLightModel>
+     */
+    open class func adventuresGetUserFollowingBuilder(userId: String) -> RequestBuilder<[UserProfileActivity]> {
+        var localVariablePath = "/api/v2.0/Adventures/Query/Users/Following/{userId}"
+        
+        
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(userId))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{userId}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[UserProfileActivity]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
 }

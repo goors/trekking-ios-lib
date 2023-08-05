@@ -103,6 +103,101 @@ final class TrekkingIosLibTests: XCTestCase {
         
     }
     
+    // profile tests
+    func testFollowUser() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AuthAPI.authenticate(userCredentials: UserCredentials(email: "nikola@pregmatch.org", password: "")) { data, error in
+            
+            let jsonData = data?.data(using: .utf8)!
+            let blogPost: String = try! JSONDecoder().decode(String.self, from: jsonData!)
+            
+            TrekkingApiAPI.customHeaders["Authorization"] = "Bearer " + blogPost
+            
+            AuthUserAPI.authUserFollowUser(userId: "396d5f5c-3f69-4afd-ad8b-d2f5c5c66387", action: true, completion: { data, error in
+                
+                guard error == nil else {
+                    
+                    XCTFail(error.debugDescription)
+                    
+                    return
+                }
+                
+                expectation.fulfill()
+                
+                res = (data != nil)
+                
+            })
+            
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
+    func testGetUserFollowers() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AdventuresAPI.adventuresGetUserFollowers(userId: "396d5f5c-3f69-4afd-ad8b-d2f5c5c66387", completion: { data, error in
+            
+            guard error == nil else {
+                
+                XCTFail(error.debugDescription)
+                
+                return
+            }
+            
+            expectation.fulfill()
+            
+            res = (data!.count > 0)
+            
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
+    func testGetUserFollowing() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AdventuresAPI.adventuresGetUserFollowing(userId: "fb6e595a-e577-43bf-bac8-4ca6321d41ff", completion: { data, error in
+            
+            guard error == nil else {
+                
+                XCTFail(error.debugDescription)
+                
+                return
+            }
+            
+            expectation.fulfill()
+            
+            res = (data!.count > 0)
+            
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
     // register test
     func testRegister() {
         

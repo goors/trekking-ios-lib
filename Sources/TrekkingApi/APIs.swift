@@ -14,7 +14,7 @@ import Foundation
 public typealias TrekkingApi = TrekkingApiAPI
 
 open class TrekkingApiAPI {
-    public static var basePath = "https://localhost:5001"
+    public static var basePath = "http://localhost:5000"
     public static var customHeaders: [String: String] = [:]
     public static var credential: URLCredential?
     public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
