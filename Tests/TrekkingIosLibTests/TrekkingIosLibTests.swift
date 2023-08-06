@@ -175,7 +175,7 @@ final class TrekkingIosLibTests: XCTestCase {
         let expectation = self.expectation(description: "Scaling")
         var res: Bool?
         
-        let q = FindQuery(text: "nik", suggestionType: SearchSuggestionType.User)
+        let q = FindQuery(text: "nik", suggestionType: SearchSuggestionType.User, lang: AdventureLanguageEnum.English)
         
         GeoAPI.geoFindGlobal(query: q, completion: { data, error in
             
@@ -188,7 +188,7 @@ final class TrekkingIosLibTests: XCTestCase {
             
             expectation.fulfill()
             
-            res = (data!.count > 0)
+            res = (data!.users.count > 0)
             
         })
         

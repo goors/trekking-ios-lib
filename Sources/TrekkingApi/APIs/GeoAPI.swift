@@ -156,7 +156,7 @@ open class GeoAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func geoFindGlobal(query: FindQuery, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [SearchSuggestion]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func geoFindGlobal(query: FindQuery, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: SearchSuggestionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return geoFindGlobalWithRequestBuilder(query: query).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -175,7 +175,7 @@ open class GeoAPI {
      - parameter city: (query)  (optional)
      - returns: RequestBuilder<[NominatimResponse]>
      */
-    open class func geoFindGlobalWithRequestBuilder(query: FindQuery) -> RequestBuilder<[SearchSuggestion]> {
+    open class func geoFindGlobalWithRequestBuilder(query: FindQuery) -> RequestBuilder<SearchSuggestionResponse> {
         let localVariablePath = "/api/v2.0/Geo/Query"
         let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: query)
@@ -189,7 +189,7 @@ open class GeoAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[SearchSuggestion]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<SearchSuggestionResponse>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

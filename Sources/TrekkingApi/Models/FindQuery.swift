@@ -15,12 +15,14 @@ public final class FindQuery: Codable, JSONEncodable, Hashable {
     
     public var text: String
     public var suggestionType: SearchSuggestionType
+    public var lang: AdventureLanguageEnum
     public var maxItemCount: Int
 
-    public init(text: String, suggestionType: SearchSuggestionType, maxItemCount: Int = 6) {
+    public init(text: String, suggestionType: SearchSuggestionType, lang: AdventureLanguageEnum, maxItemCount: Int = 6) {
         self.text = text
         self.suggestionType = suggestionType
         self.maxItemCount = maxItemCount
+        self.lang = lang
         
     }
 
@@ -28,6 +30,7 @@ public final class FindQuery: Codable, JSONEncodable, Hashable {
         case text
         case suggestionType
         case maxItemCount
+        case lang
         
     }
 
@@ -38,12 +41,14 @@ public final class FindQuery: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(suggestionType, forKey: .suggestionType)
         try container.encodeIfPresent(maxItemCount, forKey: .maxItemCount)
+        try container.encodeIfPresent(lang, forKey: .lang)
         
     }
 
     public static func == (lhs: FindQuery, rhs: FindQuery) -> Bool {
         lhs.text == rhs.text &&
         lhs.suggestionType == rhs.suggestionType &&
+        lhs.lang == rhs.lang &&
         lhs.maxItemCount == rhs.maxItemCount
         
     }
@@ -52,15 +57,8 @@ public final class FindQuery: Codable, JSONEncodable, Hashable {
         hasher.combine(text.hashValue)
         hasher.combine(suggestionType.hashValue)
         hasher.combine(maxItemCount.hashValue)
+        hasher.combine(lang.hashValue)
         
         
     }
-}
-
-public enum SearchSuggestionType : Int, Codable, CaseIterable {
-    case User = 0
-    case Adventure = 1
-    case Country = 2
-    case Category = 3
-    case Place = 4
 }
