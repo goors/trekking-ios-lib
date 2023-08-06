@@ -147,4 +147,50 @@ open class GeoAPI {
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
+    
+    
+    /**
+
+     - parameter city: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func geoFindGlobal(query: FindQuery, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [SearchSuggestion]?, _ error: Error?) -> Void)) -> RequestTask {
+        return geoFindGlobalWithRequestBuilder(query: query).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - GET /api/v2.0/Geo/Query
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter city: (query)  (optional)
+     - returns: RequestBuilder<[NominatimResponse]>
+     */
+    open class func geoFindGlobalWithRequestBuilder(query: FindQuery) -> RequestBuilder<[SearchSuggestion]> {
+        let localVariablePath = "/api/v2.0/Geo/Query"
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: query)
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        
+        
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[SearchSuggestion]>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
 }

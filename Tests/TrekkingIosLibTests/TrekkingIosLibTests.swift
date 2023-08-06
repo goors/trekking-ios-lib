@@ -170,6 +170,35 @@ final class TrekkingIosLibTests: XCTestCase {
         
     }
     
+    func testFindSugesstions() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        let q = FindQuery(text: "nik", suggestionType: SearchSuggestionType.User)
+        
+        GeoAPI.geoFindGlobal(query: q, completion: { data, error in
+            
+            guard error == nil else {
+                
+                XCTFail(error.debugDescription)
+                
+                return
+            }
+            
+            expectation.fulfill()
+            
+            res = (data!.count > 0)
+            
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
     func testGetUserFollowing() {
         
         let expectation = self.expectation(description: "Scaling")
