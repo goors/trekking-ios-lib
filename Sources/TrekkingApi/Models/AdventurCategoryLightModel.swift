@@ -19,8 +19,9 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
     public var icon: String?
     public var lang: AdventureLanguageEnum
     public var translations: [String:String]
+    public var catTranslation: String?
 
-    public init(lang: AdventureLanguageEnum, translations: [String:String], id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil) {
+    public init(lang: AdventureLanguageEnum, translations: [String:String], id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil, catTranslation: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -28,6 +29,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         self.icon = icon
         self.lang = lang
         self.translations = translations
+        self.catTranslation = catTranslation
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -38,6 +40,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         case icon
         case lang
         case translations
+        case catTranslation
     }
 
     // Encodable protocol methods
@@ -51,6 +54,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         try container.encodeIfPresent(icon, forKey: .icon)
         try container.encodeIfPresent(lang, forKey: .lang)
         try container.encodeIfPresent(translations, forKey: .translations)
+        try container.encodeIfPresent(catTranslation, forKey: .catTranslation)
     }
 
     public static func == (lhs: AdventurCategoryLightModel, rhs: AdventurCategoryLightModel) -> Bool {
@@ -60,6 +64,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         lhs.title == rhs.title &&
         lhs.lang == rhs.lang &&
         lhs.translations == rhs.translations &&
+        lhs.catTranslation == rhs.catTranslation &&
         lhs.icon == rhs.icon
         
     }
@@ -70,6 +75,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         hasher.combine(updatedAt?.hashValue)
         hasher.combine(title?.hashValue)
         hasher.combine(icon?.hashValue)
+        hasher.combine(catTranslation?.hashValue)
         hasher.combine(translations.hashValue)
         hasher.combine(lang.hashValue)
         

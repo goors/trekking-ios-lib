@@ -227,6 +227,34 @@ final class TrekkingIosLibTests: XCTestCase {
         
     }
     
+    func testGetUserAdventureProfile() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AdventuresAPI.adventuresGetUser(id: "fd05a6f0-0b77-4503-85e3-7c6dbdd2122d", lang: AdventureLanguageEnum.English, completion: { data, error in
+            
+            guard error == nil else {
+                
+                XCTFail(error.debugDescription)
+                
+                return
+            }
+            
+            expectation.fulfill()
+            
+            res = (data!.adventures.count > 0)
+            
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
     // register test
     func testRegister() {
         
