@@ -26,7 +26,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
     public var updatedTime: SearchQueryRangeOfDateTime?
     public var ids: [String]?
 
-    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil, ids: [String]?) {
+    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil, ids: [String]? = nil) {
         self.sort = sort
         self.page = page
         self.pageSize = pageSize
