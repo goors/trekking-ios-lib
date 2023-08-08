@@ -16,16 +16,19 @@ public final class UserAdventureProfile: Codable, JSONEncodable, Hashable {
     public var profile: UserModel
     
     public var adventures: [AdventuresLightModel]
+    public var stats: UserAdventureProfileStats
     
    
 
     public init(
         profile: UserModel,
         
-        adventures: [AdventuresLightModel]
+        adventures: [AdventuresLightModel],
+        stats: UserAdventureProfileStats
     ) {
         self.profile = profile
         self.adventures = adventures
+        self.stats = stats
         
         
         
@@ -35,6 +38,7 @@ public final class UserAdventureProfile: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case profile
         case adventures
+        case stats
         
         
         
@@ -46,6 +50,7 @@ public final class UserAdventureProfile: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(profile, forKey: .profile)
         try container.encodeIfPresent(adventures, forKey: .adventures)
+        try container.encodeIfPresent(stats, forKey: .stats)
         
         
         
@@ -53,6 +58,7 @@ public final class UserAdventureProfile: Codable, JSONEncodable, Hashable {
 
     public static func == (lhs: UserAdventureProfile, rhs: UserAdventureProfile) -> Bool {
         lhs.profile == rhs.profile &&
+        lhs.stats == rhs.stats &&
         lhs.adventures == rhs.adventures
         
     }
@@ -60,6 +66,7 @@ public final class UserAdventureProfile: Codable, JSONEncodable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(profile.hashValue)
         hasher.combine(adventures.hashValue)
+        hasher.combine(stats.hashValue)
         
         
         
