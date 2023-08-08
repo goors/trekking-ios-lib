@@ -508,4 +508,93 @@ open class AuthUserAPI {
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
+    
+    
+    /**
+
+     - parameter userModel: (body)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func authUserBookmark(model: BookmarkModel, apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?, _ error: Error?) -> Void)) -> RequestTask {
+        return authUserBookmarkWithRequestBuilder(model: model).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - PUT /api/v2.0/AuthUser/Profile
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter userModel: (body)
+     - returns: RequestBuilder<Bool>
+     */
+    open class func authUserBookmarkWithRequestBuilder(model: BookmarkModel) -> RequestBuilder<Bool> {
+        let localVariablePath = "/api/v2.0/AuthUser/Bookmarks"
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+    
+    /**
+
+     - parameter userModel: (body)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func authUserBookmarks(apiResponseQueue: DispatchQueue = TrekkingApiAPI.apiResponseQueue, completion: @escaping ((_ data: [BookmarkModel]?, _ error: Error?) -> Void)) -> RequestTask {
+        return authUserBookmarksWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     - PUT /api/v2.0/AuthUser/Profile
+     - API Key:
+       - type: apiKey Authorization (HEADER)
+       - name: JWT
+     - parameter userModel: (body)
+     - returns: RequestBuilder<Bool>
+     */
+    open class func authUserBookmarksWithRequestBuilder() -> RequestBuilder<[BookmarkModel]?> {
+        let localVariablePath = "/api/v2.0/AuthUser/Bookmarks"
+        let localVariableURLString = TrekkingApiAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[BookmarkModel]?>.Type = TrekkingApiAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
 }
