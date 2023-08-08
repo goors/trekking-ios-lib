@@ -27,8 +27,9 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
     public var all: Bool?
     public var recommended: Bool?
     public var fields: Int
+    public var ids: [String]?
 
-    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil, all: Bool? = nil, recommended: Bool? = nil, fields: Int = 0) {
+    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil, all: Bool? = nil, recommended: Bool? = nil, fields: Int = 0, ids: [String]? = nil) {
         self.sort = sort
         self.page = page
         self.pageSize = pageSize
@@ -39,6 +40,7 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
         self.all = all
         self.recommended = recommended
         self.fields = fields
+        self.ids = ids
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -52,6 +54,7 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
         case all
         case recommended
         case fields
+        case ids
     }
 
     // Encodable protocol methods
@@ -68,6 +71,7 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(all, forKey: .all)
         try container.encodeIfPresent(recommended, forKey: .recommended)
         try container.encodeIfPresent(fields, forKey: .fields)
+        try container.encodeIfPresent(ids, forKey: .ids)
     }
 
     public static func == (lhs: AdventuresQuery, rhs: AdventuresQuery) -> Bool {
@@ -80,6 +84,7 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
         lhs.updatedTime == rhs.updatedTime &&
         lhs.all == rhs.all &&
         lhs.recommended == rhs.recommended &&
+        lhs.ids == rhs.ids &&
         lhs.fields == rhs.fields
         
     }
@@ -94,6 +99,7 @@ public final class AdventuresQuery: Codable, JSONEncodable, Hashable {
         hasher.combine(updatedTime?.hashValue)
         hasher.combine(all?.hashValue)
         hasher.combine(recommended?.hashValue)
+        hasher.combine(ids?.hashValue)
         hasher.combine(fields.hashValue)
         
     }

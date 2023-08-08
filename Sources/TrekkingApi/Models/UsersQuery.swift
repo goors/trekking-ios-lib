@@ -24,8 +24,9 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
     public var text: String?
     public var createdTime: SearchQueryRangeOfDateTime?
     public var updatedTime: SearchQueryRangeOfDateTime?
+    public var ids: [String]?
 
-    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil) {
+    public init(sort: String? = nil, page: Int? = nil, pageSize: Int? = nil, maxItemCount: Int? = nil, text: String? = nil, createdTime: SearchQueryRangeOfDateTime? = nil, updatedTime: SearchQueryRangeOfDateTime? = nil, ids: [String]?) {
         self.sort = sort
         self.page = page
         self.pageSize = pageSize
@@ -33,6 +34,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
         self.text = text
         self.createdTime = createdTime
         self.updatedTime = updatedTime
+        self.ids = ids
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -43,6 +45,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
         case text
         case createdTime
         case updatedTime
+        case ids
     }
 
     // Encodable protocol methods
@@ -56,6 +59,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(createdTime, forKey: .createdTime)
         try container.encodeIfPresent(updatedTime, forKey: .updatedTime)
+        try container.encodeIfPresent(ids, forKey: .ids)
     }
 
     public static func == (lhs: UsersQuery, rhs: UsersQuery) -> Bool {
@@ -65,6 +69,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
         lhs.maxItemCount == rhs.maxItemCount &&
         lhs.text == rhs.text &&
         lhs.createdTime == rhs.createdTime &&
+        lhs.ids == rhs.ids &&
         lhs.updatedTime == rhs.updatedTime
         
     }
@@ -77,6 +82,7 @@ public final class UsersQuery: Codable, JSONEncodable, Hashable {
         hasher.combine(text?.hashValue)
         hasher.combine(createdTime?.hashValue)
         hasher.combine(updatedTime?.hashValue)
+        hasher.combine(ids?.hashValue)
         
     }
 }
