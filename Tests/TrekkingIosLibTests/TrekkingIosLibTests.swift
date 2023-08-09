@@ -310,4 +310,113 @@ final class TrekkingIosLibTests: XCTestCase {
         
         
     }
+    
+    // profile tests
+    func testGetUserBookmarks() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AuthAPI.authenticate(userCredentials: UserCredentials(email: "nikola@pregmatch.org", password: "")) { data, error in
+            
+            let jsonData = data?.data(using: .utf8)!
+            let blogPost: String = try! JSONDecoder().decode(String.self, from: jsonData!)
+            
+            TrekkingApiAPI.customHeaders["Authorization"] = "Bearer " + blogPost
+            AuthUserAPI.authUserBookmarks { data, error in
+                guard error == nil else {
+                    
+                    XCTFail(error.debugDescription)
+                    
+                    return
+                }
+                
+                expectation.fulfill()
+                
+                res = (data != nil)
+            }
+            
+            
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
+    func testGetUserDowloads() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AuthAPI.authenticate(userCredentials: UserCredentials(email: "nikola@pregmatch.org", password: "")) { data, error in
+            
+            let jsonData = data?.data(using: .utf8)!
+            let blogPost: String = try! JSONDecoder().decode(String.self, from: jsonData!)
+            
+            TrekkingApiAPI.customHeaders["Authorization"] = "Bearer " + blogPost
+            AuthUserAPI.authUserDownloads { data, error in
+                guard error == nil else {
+                    
+                    XCTFail(error.debugDescription)
+                    
+                    return
+                }
+                
+                expectation.fulfill()
+                
+                res = (data!.count == 0)
+            }
+            
+            
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
+    
+    func testUserDowload() {
+        
+        let expectation = self.expectation(description: "Scaling")
+        var res: Bool?
+        
+        
+        AuthAPI.authenticate(userCredentials: UserCredentials(email: "nikola@pregmatch.org", password: "")) { data, error in
+            
+            let jsonData = data?.data(using: .utf8)!
+            let blogPost: String = try! JSONDecoder().decode(String.self, from: jsonData!)
+            
+            TrekkingApiAPI.customHeaders["Authorization"] = "Bearer " + blogPost
+            AuthUserAPI.authUserDownload(id: "7e786b8d-e55d-47b0-9572-2ca704fecd57") { data, error in
+                guard error == nil else {
+                    
+                    XCTFail(error.debugDescription)
+                    
+                    return
+                }
+                
+                expectation.fulfill()
+                
+                res = (data! == true)
+            }
+            
+            
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+        XCTAssertEqual(res, true)
+        
+        
+    }
 }
