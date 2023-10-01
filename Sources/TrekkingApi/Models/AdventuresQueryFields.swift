@@ -9,16 +9,15 @@ import Foundation
 
 
 public enum AdventuresQueryFields: Int, Codable {
-    case BaseInfo = 0
-    case GeoInfo = 1
-    case UserInfo = 2
-    case CategoryInfo = 3
-    case MediaInfo = 4
+    
+    case GeoInfo = 0
+    case UserInfo = 1
+    case MediaInfo = 3
     case All = -1
 }
 
 enum AdventuresQueryFieldsBitwise: Int {
-    case BaseInfo, GeoInfo, UserInfo, CategoryInfo, MediaInfo, All = -1
+    case GeoInfo, UserInfo, MediaInfo, All = -1
     func bitmask() -> UInt32 {
         return 1 << self.rawValue
       }

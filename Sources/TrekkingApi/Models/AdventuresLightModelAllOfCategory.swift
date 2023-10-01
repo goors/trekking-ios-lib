@@ -11,7 +11,7 @@ import AnyCodable
 #endif
 
 public enum AdventuresLightModelAllOfCategory: Codable, JSONEncodable, Hashable {
-    case typeAdventurCategoryLightModel(AdventurCategoryLightModel)
+    case typeAdventurCategoryLightModel([AdventurCategoryLightModel])
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
@@ -23,7 +23,7 @@ public enum AdventuresLightModelAllOfCategory: Codable, JSONEncodable, Hashable 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(AdventurCategoryLightModel.self) {
+        if let value = try? container.decode([AdventurCategoryLightModel].self) {
             self = .typeAdventurCategoryLightModel(value)
         } else {
             throw DecodingError.typeMismatch(Self.Type.self, .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode instance of AdventuresLightModelAllOfCategory"))

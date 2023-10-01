@@ -17,20 +17,20 @@ public final class AdventuresLightModel: Codable, JSONEncodable, Hashable {
     public var updatedAt: Date?
     public var baseInfo: AdventuresLightModelAllOfBaseInfo?
     public var geoInfo: AdventuresLightModelAllOfGeoInfo?
-    public var category: AdventuresLightModelAllOfCategory?
+    public var categories: AdventuresLightModelAllOfCategory?
     public var mediaInfo: AdventuresLightModelAllOfMediaInfo?
     public var userProfile: AdventuresLightModelAllOfUserProfile?
     public var rawData: String?
     public var trekk: AnyCodable?
     public var slug: String?
 
-    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, baseInfo: AdventuresLightModelAllOfBaseInfo? = nil, geoInfo: AdventuresLightModelAllOfGeoInfo? = nil, category: AdventuresLightModelAllOfCategory? = nil, mediaInfo: AdventuresLightModelAllOfMediaInfo? = nil, userProfile: AdventuresLightModelAllOfUserProfile? = nil, rawData: String? = nil, trekk: AnyCodable? = nil, slug: String? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, baseInfo: AdventuresLightModelAllOfBaseInfo? = nil, geoInfo: AdventuresLightModelAllOfGeoInfo? = nil, categories: AdventuresLightModelAllOfCategory? = nil, mediaInfo: AdventuresLightModelAllOfMediaInfo? = nil, userProfile: AdventuresLightModelAllOfUserProfile? = nil, rawData: String? = nil, trekk: AnyCodable? = nil, slug: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.baseInfo = baseInfo
         self.geoInfo = geoInfo
-        self.category = category
+        self.categories = categories
         self.mediaInfo = mediaInfo
         self.userProfile = userProfile
         self.rawData = rawData
@@ -44,7 +44,7 @@ public final class AdventuresLightModel: Codable, JSONEncodable, Hashable {
         case updatedAt
         case baseInfo
         case geoInfo
-        case category
+        case categories
         case mediaInfo
         case userProfile
         case rawData
@@ -61,7 +61,7 @@ public final class AdventuresLightModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(baseInfo, forKey: .baseInfo)
         try container.encodeIfPresent(geoInfo, forKey: .geoInfo)
-        try container.encodeIfPresent(category, forKey: .category)
+        try container.encodeIfPresent(categories, forKey: .categories)
         try container.encodeIfPresent(mediaInfo, forKey: .mediaInfo)
         try container.encodeIfPresent(userProfile, forKey: .userProfile)
         try container.encodeIfPresent(rawData, forKey: .rawData)
@@ -75,7 +75,7 @@ public final class AdventuresLightModel: Codable, JSONEncodable, Hashable {
         lhs.updatedAt == rhs.updatedAt &&
         lhs.baseInfo == rhs.baseInfo &&
         lhs.geoInfo == rhs.geoInfo &&
-        lhs.category == rhs.category &&
+        lhs.categories == rhs.categories &&
         lhs.mediaInfo == rhs.mediaInfo &&
         lhs.userProfile == rhs.userProfile &&
         lhs.rawData == rhs.rawData &&
@@ -90,7 +90,7 @@ public final class AdventuresLightModel: Codable, JSONEncodable, Hashable {
         hasher.combine(updatedAt?.hashValue)
         hasher.combine(baseInfo?.hashValue)
         hasher.combine(geoInfo?.hashValue)
-        hasher.combine(category?.hashValue)
+        hasher.combine(categories?.hashValue)
         hasher.combine(mediaInfo?.hashValue)
         hasher.combine(userProfile?.hashValue)
         hasher.combine(rawData?.hashValue)

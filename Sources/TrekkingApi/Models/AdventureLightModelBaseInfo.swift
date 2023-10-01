@@ -19,27 +19,27 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
     public var commentsAllowed: Bool?
     public var isPublished: Bool?
     public var isRecommended: Bool?
-    public var freeDownload: Bool
+    public var freeDownload: Bool?
     public var price: Double?
     
     public var startDate: Date
     public var endDate: Date
-    public var totalDistance: Double
-    public var totalDuration: Double
-    public var minAltitude: Double
-    public var maxAltitude: Double
-    public var totalUpLength: Double
-    public var totalDownLength: Double
-    public var idleTime: Double
-    public var totalUpTime: Double
-    public var totalDownTime: Double
-    public var minSpeed: Double
-    public var maxSpeed: Double
-    public var avgSpeed: Double
-    public var caloriesBurned: Double
-    public var snickersBurned: Double
-    public var maxSlope: Double
-    public var minSlope: Double
+    public var totalDistance: Double?
+    public var totalDuration: Double?
+    public var minAltitude: Double?
+    public var maxAltitude: Double?
+    public var totalUpLength: Double?
+    public var totalDownLength: Double?
+    public var idleTime: Double?
+    public var totalUpTime: Double?
+    public var totalDownTime: Double?
+    public var minSpeed: Double?
+    public var maxSpeed: Double?
+    public var avgSpeed: Double?
+    public var caloriesBurned: Double?
+    public var snickersBurned: Double?
+    public var maxSlope: Double?
+    public var minSlope: Double?
 
     public init(
         title: String? = nil,
@@ -50,25 +50,25 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         isPublished: Bool? = nil,
         isRecommended: Bool? = nil,
         freeDownload: Bool,
-        price: Double?,
+        price: Double? = nil,
         startDate: Date,
         endDate: Date,
-        totalDistance: Double,
-        totalDuration: Double,
-        minAltitude: Double,
-        maxAltitude: Double,
-        totalUpLength: Double,
-        totalDownLength: Double,
-        idleTime: Double,
-        totalUpTime: Double,
-        totalDownTime: Double,
-        minSpeed: Double,
-        maxSpeed: Double,
-        avgSpeed: Double,
-        caloriesBurned: Double,
-        snickersBurned: Double,
-        maxSlope: Double,
-        minSlope: Double
+        totalDistance: Double? = nil,
+        totalDuration: Double? = nil,
+        minAltitude: Double? = nil,
+        maxAltitude: Double? = nil,
+        totalUpLength: Double? = nil,
+        totalDownLength: Double? = nil,
+        idleTime: Double? = nil,
+        totalUpTime: Double? = nil,
+        totalDownTime: Double? = nil,
+        minSpeed: Double? = nil,
+        maxSpeed: Double? = nil,
+        avgSpeed: Double? = nil,
+        caloriesBurned: Double? = nil,
+        snickersBurned: Double? = nil,
+        maxSlope: Double? = nil,
+        minSlope: Double? = nil
     ) {
         self.title = title
         self.subTitle = subTitle
@@ -203,25 +203,25 @@ public final class AdventureLightModelBaseInfo: Codable, JSONEncodable, Hashable
         hasher.combine(commentsAllowed?.hashValue)
         hasher.combine(isPublished?.hashValue)
         hasher.combine(isRecommended?.hashValue)
-        hasher.combine(freeDownload.hashValue)
+        hasher.combine(freeDownload?.hashValue)
         hasher.combine(startDate.hashValue)
         hasher.combine(endDate.hashValue)
-        hasher.combine(totalDistance.hashValue)
-        hasher.combine(totalDuration.hashValue)
-        hasher.combine(minAltitude.hashValue)
-        hasher.combine(maxAltitude.hashValue)
-        hasher.combine(totalUpLength.hashValue)
-        hasher.combine(totalDownLength.hashValue)
-        hasher.combine(idleTime.hashValue)
-        hasher.combine(totalUpTime.hashValue)
-        hasher.combine(totalDownTime.hashValue)
-        hasher.combine(minSpeed.hashValue)
-        hasher.combine(maxSpeed.hashValue)
-        hasher.combine(avgSpeed.hashValue)
-        hasher.combine(caloriesBurned.hashValue)
-        hasher.combine(snickersBurned.hashValue)
-        hasher.combine(maxSlope.hashValue)
-        hasher.combine(minSlope.hashValue)
+        hasher.combine(totalDistance?.hashValue)
+        hasher.combine(totalDuration?.hashValue)
+        hasher.combine(minAltitude?.hashValue)
+        hasher.combine(maxAltitude?.hashValue)
+        hasher.combine(totalUpLength?.hashValue)
+        hasher.combine(totalDownLength?.hashValue)
+        hasher.combine(idleTime?.hashValue)
+        hasher.combine(totalUpTime?.hashValue)
+        hasher.combine(totalDownTime?.hashValue)
+        hasher.combine(minSpeed?.hashValue)
+        hasher.combine(maxSpeed?.hashValue)
+        hasher.combine(avgSpeed?.hashValue)
+        hasher.combine(caloriesBurned?.hashValue)
+        hasher.combine(snickersBurned?.hashValue)
+        hasher.combine(maxSlope?.hashValue)
+        hasher.combine(minSlope?.hashValue)
         
     }
 }

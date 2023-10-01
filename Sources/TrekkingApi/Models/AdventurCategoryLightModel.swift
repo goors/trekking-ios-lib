@@ -18,10 +18,10 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
     public var title: String?
     public var icon: String?
     public var lang: AdventureLanguageEnum
-    public var translations: [String:String]
+    public var translations: [String:String]?
     public var catTranslation: String?
 
-    public init(lang: AdventureLanguageEnum, translations: [String:String], id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil, catTranslation: String? = nil) {
+    public init(lang: AdventureLanguageEnum, translations: [String:String]? = nil, id: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, title: String? = nil, icon: String? = nil, catTranslation: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -76,7 +76,7 @@ public final class AdventurCategoryLightModel: Codable, JSONEncodable, Hashable 
         hasher.combine(title?.hashValue)
         hasher.combine(icon?.hashValue)
         hasher.combine(catTranslation?.hashValue)
-        hasher.combine(translations.hashValue)
+        hasher.combine(translations?.hashValue)
         hasher.combine(lang.hashValue)
         
     }
